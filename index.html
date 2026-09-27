@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roadrunner files — short confidentiality agreement</title>
+  <style>
+    :root { --navy:#1b3a4b; --paper:#f7f4ee; --ink:#1a1a1a; --line:#d7d0c4; --gold:#c4a35a; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--paper); color:var(--ink); }
+    header { background:var(--navy); color:#fff; padding:24px 20px; }
+    header h1 { margin:0 0 6px; font-size:22px; }
+    header p { margin:0; color:#d7e0e6; font-family:Arial,sans-serif; font-size:14px; }
+    main { max-width:720px; margin:0 auto; padding:24px 18px 64px; }
+    .nda { background:#fff; border:1px solid var(--line); padding:16px 18px; font-size:15px; line-height:1.55; }
+    label.row { display:flex; gap:10px; align-items:flex-start; margin:12px 0; font-family:Arial,sans-serif; font-size:14px; }
+    input[type=text], input[type=email] { width:100%; padding:10px 12px; border:1px solid var(--line); font-size:15px; font-family:Arial,sans-serif; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media (max-width:640px){ .grid { grid-template-columns:1fr; } }
+    button { background:var(--navy); color:#fff; border:0; padding:12px 18px; font-size:15px; font-family:Arial,sans-serif; cursor:pointer; margin-top:8px; }
+    button:disabled { background:#9aa3ad; cursor:not-allowed; }
+    #files { display:none; margin-top:28px; }
+    #files.open { display:block; }
+    .file { display:flex; justify-content:space-between; align-items:center; gap:12px; background:#fff; border:1px solid var(--line); padding:12px 14px; margin:8px 0; font-family:Arial,sans-serif; font-size:14px; }
+    .file a { color:#fff; background:var(--navy); text-decoration:none; padding:8px 12px; white-space:nowrap; }
+    .warn { background:#fff6e8; border-left:4px solid var(--gold); padding:12px 14px; font-family:Arial,sans-serif; font-size:13px; }
+    #status { font-family:Arial,sans-serif; font-size:13px; color:#5c6570; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Roadrunner Rd — files behind a short NDA</h1>
+    <p>Tara Stapley · 0 N Roadrunner Rd, Apache Junction · APN 103-06-034B</p>
+  </header>
+  <main>
+    <p>There is no prior NDA. This page is how we stay inside our legal-oversight and compliance rules. Please read it first. Click Yes after you agree. The files stay locked until then.</p>
+    <h2>1. Who you are</h2>
+    <div class="grid">
+      <div><label for="fullName">Full legal name</label><input id="fullName" type="text" value="Tara Stapley" /></div>
+      <div><label for="email">Email</label><input id="email" type="email" value="stapleytara@gmail.com" /></div>
+    </div>
+    <h2>2. Short NDA</h2>
+    <div class="nda">
+      <p><strong>CONFIDENTIALITY AGREEMENT</strong><br>0 N Roadrunner Rd, Apache Junction, AZ 85119 · APN 103-06-034B<br>This short note is how we stay inside our legal-oversight and compliance rules. It is not a lack of trust. There is no prior NDA.</p>
+      <p><strong>1. Parties</strong><br>E. Bruce Brimacombe, as CEO of GOe3 Technologies LLC, is sharing files. Tara Stapley, real-estate agent, is receiving them so she can help with this lot.</p>
+      <p><strong>2. Property</strong><br>Only our acre at 0 N Roadrunner Rd, Apache Junction, APN 103-06-034B, and the work on that acre.</p>
+      <p><strong>3. What stays private</strong><br>Please keep private the financials, bank statements, proof of funds, account numbers, unpublished addresses, tax pages used to qualify, offer numbers not on the MLS, unpublished build quotes, and the launch videos that open after Yes.<br>Already public: MLS price, APN, zoning, setbacks, county records.</p>
+      <p><strong>4. Purpose</strong><br>Please use these files only to help with this Property.</p>
+      <p><strong>5. Who else may see it</strong><br>Please do not pass the private files to another agent, buyer, seller, lender, title, MLS, social, or group chat unless Bruce writes yes first. Broker or office counsel may see them if they follow these same rules.</p>
+      <p><strong>6. Care and return</strong><br>Please keep the files safe. When we are done, delete or send them back unless your license requires one copy.</p>
+      <p><strong>7. How long</strong><br>Five years from Yes. Tax pages, account numbers, and unpublished addresses stay private longer if they are still not public.</p>
+      <p><strong>8. What this is not</strong><br>Not a listing agreement. It does not ask Bruce to buy the lot.</p>
+      <p><strong>9. How Tara agrees</strong><br>Clicking Yes — show the files is the agreement.</p>
+    </div>
+    <label class="row"><input type="checkbox" id="c1" /> <span>I have read this short compliance NDA.</span></label>
+    <label class="row"><input type="checkbox" id="c2" /> <span>I agree to keep Bruce’s private files inside these rules, except my broker or office counsel if they will do the same.</span></label>
+    <label class="row"><input type="checkbox" id="c3" /> <span>Yes — please show me the files.</span></label>
+    <p><button id="unlock" type="button" disabled>Yes — show the files</button></p>
+    <div id="status">Check all three boxes and keep your name on the page.</div>
+    <section id="files"><h2>3. Files</h2><p class="warn">Unlocked for this browser only. This click is your signature.</p><div id="fileList"></div></section>
+  </main>
+  <script>
+    const PACKET_FILES = [
+      { title: "Roadrunner NDA", note: "One-page agreement.", href: "https://drive.google.com/file/d/1gv3ZuAQAjmeeR-mE8ImjfO4DZyVPSsCa/view?usp=drivesdk" },
+      { title: "Roadrunner AJ build packet", note: "Lot snapshot.", href: "https://drive.google.com/file/d/1JdwxzinxXD-rSoZ5MG1btQeC_LalUGCp/view?usp=drivesdk" },
+      { title: "Antigua launch — public call", note: "Launch video.", href: "https://drive.google.com/file/d/11aDdGN45jGqM6w2LcjcNeGn_e1_6FmEO/view?usp=drivesdk" },
+      { title: "Antigua launch — to the work", note: "Launch video.", href: "https://drive.google.com/file/d/1Bhq0vxWX9-DurEfBWDT0wjS1oF_Hva3R/view?usp=drivesdk" },
+      { title: "Antigua TFZ brief", note: "Zone brief.", href: "https://drive.google.com/file/d/18NdKVll53ksydY3ONBPfpJTx_PUpg3V2/view?usp=drivesdk" }
+    ];
+    const name = document.getElementById("fullName");
+    const boxes = ["c1","c2","c3"].map(id => document.getElementById(id));
+    const unlock = document.getElementById("unlock");
+    const files = document.getElementById("files");
+    const list = document.getElementById("fileList");
+    const status = document.getElementById("status");
+    function ready() { return name.value.trim().length > 2 && boxes.every(b => b.checked); }
+    function paint() { unlock.disabled = !ready(); status.textContent = ready() ? "Ready. Click Yes to release the files." : "Check all three boxes and keep your name on the page."; }
+    name.addEventListener("input", paint);
+    boxes.forEach(b => b.addEventListener("change", paint));
+    unlock.addEventListener("click", function () {
+      if (!ready()) return;
+      list.innerHTML = "";
+      PACKET_FILES.forEach(function (item) {
+        const row = document.createElement("div");
+        row.className = "file";
+        const left = document.createElement("div");
+        left.innerHTML = "<strong>" + item.title + "</strong><br>" + item.note;
+        const a = document.createElement("a");
+        a.textContent = "Open";
+        a.href = item.href;
+        a.target = "_blank";
+        row.appendChild(left);
+        row.appendChild(a);
+        list.appendChild(row);
+      });
+      files.classList.add("open");
+      unlock.disabled = true;
+      status.textContent = "Released for " + name.value.trim() + ".";
+    });
+    paint();
+  </script>
+</body>
+</html>
